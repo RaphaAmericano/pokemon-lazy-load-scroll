@@ -8,7 +8,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "test": "ls -a"
+    "test": "ls -a && cd dist & ls -a"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.3.6",
