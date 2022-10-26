@@ -1,4 +1,6 @@
+import { Box, ListItem, SkeletonCircle } from "@chakra-ui/react";
 import { pokemonQueries } from "../../hooks/queries";
+import { stringUtils } from "../../utils";
 
 interface IProps {
     name: string;
@@ -6,10 +8,14 @@ interface IProps {
 }
 export function Card(props: IProps ){
     const { name, url } = props;
-    // const { data } = pokemonQueries.useGetPokemonByUrl({ url });
+    const { data } = pokemonQueries.useGetPokemonByUrl({ url });
+    if(!data) return null;
+    const { sprites: { front_default }  } = data;
 
-    return <li>
-        {name}
-        {/* {data ?? <img src={data.sprites.front_default}/>} */}
-        </li>
+    return  <ListItem>
+                <Box padding="6" boxShadow="lg" bg="white">
+                    {stringUtils.capsizeFirst(name)}
+                    {front_default !== null ? <img src={front_default} /> : <SkeletonCircle /> }
+                </Box>
+            </ListItem>
 }
