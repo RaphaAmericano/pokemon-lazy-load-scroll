@@ -7,7 +7,7 @@ export function useGetPokemons( params: pokemonSchemas.GetPokemonsRequestParams 
     return pokemonRequests.getPokemons(params!);
   }
 
-  const query = useQuery<unknown, unknown>(
+  const query = useQuery<pokemonSchemas.GetPokemonsResponse, unknown>(
     ["get-pokemons", params],
     requestFn,
     {
@@ -24,7 +24,7 @@ export function useGetPokemonByUrl(params: pokemonSchemas.GetPokemonByUrlRequest
         return pokemonRequests.getPokemonByUrl(params!);
     }
 
-    const query = useQuery<unknown, unknown>(["get-pokemon", params], requestFn, {
+    const query = useQuery<pokemonSchemas.GetPokemonByUrlsResponse, unknown>(["get-pokemon", params], requestFn, {
         enabled: Boolean(params),
         staleTime: 2000
     });
