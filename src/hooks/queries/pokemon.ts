@@ -2,7 +2,7 @@ import { useQuery } from "react-query";
 import { pokemonRequests } from "../../api/requests";
 import { pokemonSchemas } from "../../api/schemes";
 
-export function useGetPokemons( params: pokemonSchemas.GetPokemonsRequestParams ) {
+export function useGetPokemons( params?: pokemonSchemas.GetPokemonsRequestParams ) {
   async function requestFn() {
     return pokemonRequests.getPokemons(params!);
   }
@@ -19,7 +19,7 @@ export function useGetPokemons( params: pokemonSchemas.GetPokemonsRequestParams 
   return query;
 };
 
-export function useGetPokemonByUrl(params: pokemonSchemas.GetPokemonByUrlRequestParams){
+export function useGetPokemonByUrl(params?: pokemonSchemas.GetPokemonByUrlRequestParams){
     async function requestFn(){
         return pokemonRequests.getPokemonByUrl(params!);
     }
