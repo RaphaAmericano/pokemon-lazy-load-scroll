@@ -1,3 +1,8 @@
+export interface PokemonResume { 
+  name: string; 
+  url: string 
+}
+
 export interface GetPokemonsRequestParams {
   url: string;
 }
@@ -5,7 +10,7 @@ export interface GetPokemonsResponse {
   count: number;
   next: string | null;
   previous: string | null;
-  results: { name: string; url: string }[];
+  results: PokemonResume[];
 }
 
 export interface GetPokemonByUrlRequestParams {

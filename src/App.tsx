@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react";
+import { pokemonSchemas } from "./api/schemes";
 import { Card } from "./components/Card";
 import { pokemonQueries } from "./hooks/queries";
 
 function App() {
   const sentinelRef = useRef(null);
-  const [pokemons, setPokemons] = useState<any[]>([]);
+  const [pokemons, setPokemons] = useState<pokemonSchemas.PokemonResume[]>([]);
   const [offset, setOffset] = useState<number>(0);
 
   const { data, isLoading, isRefetching } = pokemonQueries.useGetPokemons({
@@ -13,9 +14,9 @@ function App() {
 
   useEffect(() => {
     console.log(data);
-    if (data) {
-      // const { results } = data;
-      // setPokemons((prevPokemons) =>    [...prevPokemons, ...results].filter((value, index, self) => self.indexOf(value) === index) )
+    if (data?.results) {
+      const { results } = data;
+      setPokemons((prevPokemons) => [...prevPokemons, ...results])
     }
   }, [offset, data]);
 
@@ -25,7 +26,7 @@ function App() {
         setOffset((prev) => prev + 20);
       }
     });
-
+    console.log(sentinelRef.current);
     if(sentinelRef.current !== null ){
       intersectionObserver.observe(sentinelRef.current);
     }
