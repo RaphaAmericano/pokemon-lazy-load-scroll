@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Card } from "./components/Card";
 import { pokemonQueries } from "./hooks/queries";
 
 function App() {
+  const sentinelRef = useRef(null);
   const [pokemons, setPokemons] = useState<any[]>([]);
   const [offset, setOffset] = useState<number>(0);
 
@@ -11,12 +12,11 @@ function App() {
   });
 
   useEffect(() => {
-      console.log(data);
-      if( data ){
-        const { results } = data;
-        // setPokemons((prevPokemons) =>    [...prevPokemons, ...results].filter((value, index, self) => self.indexOf(value) === index) )
-      }
-    
+    console.log(data);
+    if (data) {
+      // const { results } = data;
+      // setPokemons((prevPokemons) =>    [...prevPokemons, ...results].filter((value, index, self) => self.indexOf(value) === index) )
+    }
   }, [offset, data]);
 
   useEffect(() => {
@@ -26,9 +26,12 @@ function App() {
       }
     });
 
-    intersectionObserver.observe(document.querySelector("#sentinel"));
+    if(sentinelRef.current !== null ){
+      intersectionObserver.observe(sentinelRef.current);
+    }
+    
     return () => intersectionObserver.disconnect();
-  }, []);
+  }, [sentinelRef.current]);
 
   return (
     <main>
@@ -38,7 +41,7 @@ function App() {
         {pokemons.map((pokemon) => (
           <Card key={pokemon.url} {...pokemon} />
         ))}
-        <li id="sentinel" style={{ height: "20px", background: "green" }} />
+        <li ref={sentinelRef} style={{ height: "20px", background: "green" }} />
       </ul>
     </main>
   );

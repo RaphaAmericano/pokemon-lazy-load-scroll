@@ -6,7 +6,6 @@ const service = axios.create({
         "Content-Type": "application/json"
     }
 });
-
 function parseResponse(response: AxiosResponse){
     return response.data;
 }
