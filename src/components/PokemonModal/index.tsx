@@ -7,6 +7,7 @@ import {
   ModalHeader,
 } from "@chakra-ui/react";
 import { pokemonSchemas } from "../../api/schemes";
+import { pokemonTypeColor } from "../../utils/properties";
 import { capsizeFirst } from "../../utils/strings";
 
 type IProps = pokemonSchemas.Pokemon;
@@ -25,15 +26,15 @@ export function PokemonModal(props: IProps) {
         <Box>
           {front_default !== null && <Image src={front_default} />}
           <Box p={6}>
-            <Box display="flex" alignItems={"baseline"}>
-              {types.map(({ name }) => (
+            <Box display="flex" alignItems={"baseline"} gap={1}>
+              {types.map(({ type }) => (
                 <Badge
-                  key={name}
+                  key={type.name}
                   borderRadius={"full"}
                   px="2"
-                  colorScheme={"teal"}
+                  colorScheme={pokemonTypeColor(type.name)}
                 >
-                  {name}
+                  {type.name}
                 </Badge>
               ))}
             </Box>
