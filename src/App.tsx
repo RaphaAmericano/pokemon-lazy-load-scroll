@@ -2,6 +2,7 @@ import { Container, Heading, List, Spinner } from "@chakra-ui/react";
 import { useEffect, useRef, useState } from "react";
 import { pokemonSchemas } from "./api/schemes";
 import { Card } from "./components/Card";
+import { ModalContainer } from "./components/ModalContainer";
 import { pokemonQueries } from "./hooks/queries";
 
 function App() {
@@ -17,8 +18,6 @@ function App() {
 
   useEffect(() => {
     if (data !== undefined) {
-      console.log(data);
-      console.log(offset);
       const { results } = data;
       setPokemons(
         (prevPokemons) =>
@@ -52,9 +51,10 @@ function App() {
         .map((pokemon) => (
           <Card key={pokemon.url} {...pokemon} />
         ))}
-        <li ref={sentinelRef} style={{ height: "20px", background: "green" }} />
+        <li ref={sentinelRef} style={{ height: "20px", background: "transparent" }} />
       </List>
       {isLoading && <Spinner size="xl" />}
+      <ModalContainer />
     </Container>
   );
 }

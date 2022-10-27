@@ -1,3 +1,3 @@
 import * as pokemonSchemas from "./pokemon";
-
-export { pokemonSchemas }
+import * as propertiesSchemas from "./properties";
+export { pokemonSchemas, propertiesSchemas }
